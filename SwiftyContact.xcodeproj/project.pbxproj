@@ -13,6 +13,9 @@
 		493FD8FC1CE240C500046AD8 /* SwiftyContact.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 493FD8FA1CE240C500046AD8 /* SwiftyContact.xcdatamodeld */; };
 		493FD8FE1CE240C500046AD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 493FD8FD1CE240C500046AD8 /* Assets.xcassets */; };
 		493FD9011CE240C500046AD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493FD8FF1CE240C500046AD8 /* LaunchScreen.storyboard */; };
+		493FD90C1CE2497600046AD8 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FD90A1CE2497600046AD8 /* Contact+CoreDataProperties.swift */; };
+		493FD90D1CE2497600046AD8 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FD90B1CE2497600046AD8 /* Contact.swift */; };
+		493FD90F1CE24D8A00046AD8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FD90E1CE24D8A00046AD8 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		493FD8FD1CE240C500046AD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		493FD9001CE240C500046AD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		493FD9021CE240C500046AD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		493FD90A1CE2497600046AD8 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		493FD90B1CE2497600046AD8 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		493FD90E1CE24D8A00046AD8 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +65,13 @@
 				493FD8F31CE240C500046AD8 /* AppDelegate.swift */,
 				493FD8F51CE240C500046AD8 /* ViewController.swift */,
 				493FD8F71CE240C500046AD8 /* Main.storyboard */,
+				493FD90E1CE24D8A00046AD8 /* DetailViewController.swift */,
 				493FD8FD1CE240C500046AD8 /* Assets.xcassets */,
 				493FD8FF1CE240C500046AD8 /* LaunchScreen.storyboard */,
 				493FD9021CE240C500046AD8 /* Info.plist */,
 				493FD8FA1CE240C500046AD8 /* SwiftyContact.xcdatamodeld */,
+				493FD90A1CE2497600046AD8 /* Contact+CoreDataProperties.swift */,
+				493FD90B1CE2497600046AD8 /* Contact.swift */,
 			);
 			path = SwiftyContact;
 			sourceTree = "<group>";
@@ -139,7 +148,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				493FD90C1CE2497600046AD8 /* Contact+CoreDataProperties.swift in Sources */,
 				493FD8F61CE240C500046AD8 /* ViewController.swift in Sources */,
+				493FD90D1CE2497600046AD8 /* Contact.swift in Sources */,
+				493FD90F1CE24D8A00046AD8 /* DetailViewController.swift in Sources */,
 				493FD8F41CE240C500046AD8 /* AppDelegate.swift in Sources */,
 				493FD8FC1CE240C500046AD8 /* SwiftyContact.xcdatamodeld in Sources */,
 			);
