@@ -66,11 +66,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Contact List" id="2mk-nA-McU">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="GdD-G7-C5q">
-                            <connections>
-                                <segue destination="IH2-DO-TfA" kind="show" identifier="Add" id="LGC-F3-Mw4"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="GdD-G7-C5q">
+                                <connections>
+                                    <segue destination="IH2-DO-TfA" kind="show" identifier="Add" id="LGC-F3-Mw4"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="List" id="fpK-TN-ga7">
+                                <connections>
+                                    <action selector="showContactsListView:" destination="BYZ-38-t0r" id="5gf-g4-VJt"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="contactTableView" destination="1XM-FC-va5" id="wmd-BG-bE0"/>

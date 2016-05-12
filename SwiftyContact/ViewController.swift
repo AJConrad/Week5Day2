@@ -8,15 +8,45 @@
 
 import UIKit
 import CoreData
+import ContactsUI
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CNContactPickerDelegate, CNContactViewControllerDelegate {
     
+    let contactStore = CNContactStore ()
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var contactArray = [Contact]()
     @IBOutlet weak var          contactTableView :UITableView!
 
+    //MARK: - Phone Contact Stuff
     
+    @IBAction private func showContactsListView(sender: UIBarButtonItem) {
+        let contactListVC = CNContactPickerViewController()
+        contactListVC.delegate = self
+        presentViewController(contactListVC, animated: true, completion: nil)
+    }
+    
+    func contactPicker(picker: CNContactPickerViewController, didSelectContact contact: CNContact) {
+        let entityDescription = NSEntityDescription.entityForName("Contact", inManagedObjectContext: managedObjectContext)
+        let newContact = Contact(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext)
+            newContact.firstName = contact.givenName
+            newContact.lastName = contact.familyName
+        if  let email = contact.emailAddresses.first?.value as? String {
+            newContact.emailAddress = email
+        }
+        if let address = contact.postalAddresses.first {
+            let addressValue = address.value as! CNPostalAddress
+            newContact.streetAddress = addressValue.street
+            newContact.cityAddress = addressValue.city
+            newContact.stateAddress = addressValue.state
+            newContact.zipAddress = addressValue.postalCode
+        }
+        if let phone = contact.phoneNumbers.first?.value as? CNPhoneNumber {
+            newContact.phoneNumber = phone.stringValue
+        }
+        newContact.rating = 0
+        appDelegate.saveContext()
+    }
     
     //MARK: - Core Data Methods
     
