@@ -15,6 +15,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var contactArray = [Contact]()
     @IBOutlet weak var          contactTableView :UITableView!
+
+    
     
     //MARK: - Core Data Methods
     
@@ -29,6 +31,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         newContact.zipAddress = "35010"
         newContact.phoneNumber = "123-456-7890"
         newContact.emailAddress = "duckExterminator@yahoo.com"
+        newContact.rating = 3
         appDelegate.saveContext()
     }
     
@@ -41,8 +44,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return nil
         }
     }
-    
-    //MARK: - Interactivity Methods
+    //MARK: - Segue Methods
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destController = segue.destinationViewController as! DetailViewController
@@ -55,15 +57,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             destController.selectedContact = nil
         }
     }
-    
-    
-//    if ([[segue identifier] isEqualToString:@"editAssignmentSegue"]) {
-//    NSIndexPath *indexPath = [_assignmentsTable indexPathForSelectedRow];
-//    Assignment *selectedAssignment = _assignmentsArray [indexPath.row];
-//    destController.currentAssignment = selectedAssignment;
-//    } else if ([[segue identifier] isEqualToString:@"addAssignmentSegue"]) {
-//    destController.currentAssignment = nil;
-    
     
     //MARK: - Table View Methods
     
