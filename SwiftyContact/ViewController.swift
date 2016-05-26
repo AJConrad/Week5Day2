@@ -16,6 +16,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var contactArray = [Contact]()
+    
+    var indexArray = [String]()
+    var sectionArray = [String]()
+    var lastNameLetterArray = [String]()
+    
     @IBOutlet weak var          contactTableView :UITableView!
 
     //MARK: - Phone Contact Stuff
@@ -88,19 +93,59 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    //MARK: - Core Sorting Methods
+    
+    private func createIndexFromArray(array: [Contact]) -> [String] {
+        let lastNameArray = array.map {$0.lastName!}
+        var uniqueArray = Array(Set(lastNameArray))
+        uniqueArray.sortInPlace()
+        return uniqueArray
+    }
+    
+    private func createLettersIndexFromArray(array: [String]) -> [String] {
+        let letterArray = array.map {String($0[$0.startIndex.advancedBy(0)])}
+        var uniqueArray = Array(Set(letterArray))
+        uniqueArray.sortInPlace()
+        return uniqueArray
+    }
+    
+    private func filterArrayForSection(array: [Contact], section: Int) -> [Contact] {
+        let sectionHeader = indexArray[section]
+        return array.filter {$0.lastName == sectionHeader}
+    }
+    
+    
     //MARK: - Table View Methods
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return indexArray.count
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contactArray.count
+        return filterArrayForSection(contactArray, section: section).count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        let currentContact = contactArray[indexPath.row]
+        let sectionArray = filterArrayForSection(contactArray, section: indexPath.section)
+        let currentContact = sectionArray[indexPath.row]
+//        let sectionArray = filterArrayForSection(peopleArray, section: indexPath.section)
+//        let currentPerson = sectionArray[indexPath.row]
         cell.textLabel!.text = currentContact.firstName! + " " + currentContact.lastName!
         cell.detailTextLabel!.text = currentContact.phoneNumber!
         return cell
     }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return lastNameLetterArray[section]
+    }
+    //MARK: - NEED HELP HERE
+    //
+    //
+    //
+    //
+    //I BROKE EVERYTHING WHEN I TRIED TO HAVE A SECOND NAME STARTING WITH THE SAME LETTER! IDK WHAT I DID!!!
+    
     
     //MARK: - Life Cycle Methods
     
@@ -114,7 +159,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         contactArray = fetchContact()!
+        contactArray.sortInPlace { (contact1: Contact, contact2: Contact) -> Bool in
+            contact1.lastName < contact2.lastName
+        }
+        print(contactArray)
         contactTableView.reloadData()
+        
+        indexArray = createIndexFromArray(contactArray)
+        print("\(indexArray)")
+        lastNameLetterArray = createLettersIndexFromArray(indexArray)
+        print("\(lastNameLetterArray)")
     }
 
     override func didReceiveMemoryWarning() {
